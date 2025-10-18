@@ -28,6 +28,10 @@ func ReverseProxy(targetHost string) gin.HandlerFunc {
 
 // SetupRoutes configures all routes and applies middleware
 func SetupRoutes(r *gin.Engine) {
+	r.GET("/health", func(c *gin.Context) {
+		c.String(http.StatusOK, "OK")
+	})
+
 	r.Use(middlewares.RateLimit())
 	r.Use(middlewares.Logger())
 
