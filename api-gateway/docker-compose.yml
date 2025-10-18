@@ -2,8 +2,19 @@ version: '3.8'
 
 services:
   api-gateway:
-    container_name: "API gateway"
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: "api-gateway"
     ports:
+      - 8080:8080
+    expose:
       - 8080
-      - 443
     command: ["go", "run", "main.go"]
+    networks:
+      - web
+networks:
+  web:
+    external: true
+  postgres-db:
+    driver: bridge
