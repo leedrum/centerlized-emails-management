@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  api-gateway:
+    container_name: "API gateway"
+    ports:
+      - 8080
+      - 443
+    command: ["go", "run", "main.go"]
