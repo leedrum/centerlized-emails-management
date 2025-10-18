@@ -2,6 +2,7 @@ package middlewares
 
 import (
 	"net/http"
+	"os"
 	"strings"
 
 	"github.com/gin-gonic/gin"
@@ -9,7 +10,8 @@ import (
 )
 
 // Secret key used to sign the JWT tokens (should be env var in prod)
-var JwtSecret = []byte("your-secret-key")
+
+var JwtSecret = []byte(os.Getenv("JWT_SECRET"))
 
 func JWTAuth() gin.HandlerFunc {
 	return func(c *gin.Context) {
