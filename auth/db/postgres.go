@@ -37,7 +37,7 @@ func (p *PostgresStorage) LoadEnv() {
 	p.Host = getEnv("DB_HOST", "localhost")
 	p.User = getEnv("DB_USER", "root")
 	p.Password = getEnv("DB_PASSWORD", "123456")
-	p.DBName = getEnv("DB_NAME", "cem-auth")
+	p.DBName = getEnv("DB_NAME", "cem_auth")
 	p.Port = getEnv("DB_PORT", "5432")
 }
 
