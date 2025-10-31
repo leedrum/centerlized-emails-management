@@ -5,6 +5,9 @@ POSTGRESQL_URL='postgres://root:123456@localhost:5432/cem_auth?sslmode=disable'
 createdb:
 	docker exec -it postgres createdb --username=root --owner=root cem_auth
 
+dropdb:
+	docker exec -it postgres dropdb --username=root cem_auth
+
 new_migration:
 	migrate create -ext sql -dir db/migrations -seq $(name)
 
