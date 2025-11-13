@@ -1,0 +1,36 @@
+package db
+
+import (
+	"database/sql"
+	"fmt"
+	"log"
+	"os"
+
+	_ "github.com/lib/pq"
+)
+
+func NewPostgresDB() *sql.DB {
+	host := os.Getenv("DB_HOST")
+	port := os.Getenv("DB_PORT")
+	user := os.Getenv("DB_USER")
+	pass := os.Getenv("DB_PASS")
+	name := os.Getenv("DB_NAME")
+	sslmode := os.Getenv("DB_SSLMODE") // e.g. "disable" for local dev
+
+	dsn := fmt.Sprintf(
+		"host=%s port=%s user=%s password=%s dbname=%s sslmode=%s",
+		host, port, user, pass, name, sslmode,
+	)
+
+	db, err := sql.Open("postgres", dsn)
+	if err != nil {
+		log.Fatalf("failed to open postgres: %v", err)
+	}
+
+	if err := db.Ping(); err != nil {
+		log.Fatalf("failed to ping postgres: %v", err)
+	}
+
+	log.Println("✅ Connected to Postgres successfully")
+	return db
+}
