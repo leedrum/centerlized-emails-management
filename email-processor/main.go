@@ -114,7 +114,7 @@ func handleEmailMessage(ctx context.Context, data map[string]interface{}) error 
 
 	// Produce message for indexer
 	prod := kafka.NewProducer(kafkaBrokers)
-	return prod.Publish("email_indexer.new_email", map[string]interface{}{
+	return prod.Publish("email_indexer.reindex", map[string]interface{}{
 		"tenant_id": tenant,
 		"email_id":  id,
 	})
